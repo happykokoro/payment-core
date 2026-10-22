@@ -1,0 +1,4 @@
+{
+  "base-sepolia": { "id": "base-sepolia:usdc", "chainId": 84532, "name": "Base Sepolia", "symbol": "USDC", "decimals": 6, "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e", "testnet": true },
+  "base": { "id": "base:usdc", "chainId": 8453, "name": "Base", "symbol": "USDC", "decimals": 6, "token": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", "testnet": false }
+}

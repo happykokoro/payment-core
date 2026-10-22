@@ -1,0 +1,52 @@
+{
+  "name": "payment-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Single-merchant USDC payment records, webhooks, and optional redeemable vouchers",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.14"
+  },
+  "scripts": {
+    "dev": "tsx --env-file=.env src/main.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node --env-file=.env dist/main.js",
+    "check": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p examples/tsconfig.json",
+    "test": "vitest run",
+    "test:integration": "vitest run test/integration.test.ts",
+    "probe": "tsx --env-file=.env scripts/probe.ts",
+    "keys": "node scripts/keys.mjs",
+    "example:webhook": "node --env-file=.env scripts/webhook-receiver.mjs",
+    "example:merchant": "tsx --env-file=.env examples/merchant/server.ts",
+    "test:restore": "vitest run test/restore.test.ts"
+  },
+  "dependencies": {
+    "@fastify/rate-limit": "^10.3.0",
+    "fastify": "^5.12.7",
+    "pg": "^8.16.3",
+    "viem": "^2.57.10",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "@types/pg": "^8.15.5",
+    "embedded-postgres": "^18.4.0-beta.17",
+    "solc": "^0.8.38",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  },
+  "optionalDependencies": {
+    "@foundry-rs/anvil-darwin-amd64": "^1.7.1",
+    "@foundry-rs/anvil-darwin-arm64": "^1.7.1",
+    "@foundry-rs/anvil-linux-amd64": "^1.7.1",
+    "@foundry-rs/anvil-linux-arm64": "^1.7.1",
+    "@foundry-rs/anvil-win32-amd64": "^1.7.1"
+  },
+  "overrides": {
+    "solc": {
+      "tmp": "^0.2.7"
+    }
+  }
+}

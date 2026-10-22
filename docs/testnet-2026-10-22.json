@@ -1,0 +1,46 @@
+{
+  "result": "PASS",
+  "network": "Base Sepolia",
+  "chainId": 84532,
+  "invoiceId": "063ae140-1c90-48cd-8fc3-c0f154922110",
+  "recipient": "0xc7191f2113dd9bb1687bde83973871050c771a4d",
+  "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+  "amountUnits": "20000000",
+  "payment": {
+    "transaction_hash": "0x973ef87dc6362731eb275c2296d2996b9e3decef1f50f0ce487bbe18dbf367b9",
+    "log_index": 0,
+    "block_number": "48778103",
+    "block_hash": "0x54f79eb9d6cd1fe8cc354bd561049767809bfa533108fd84f233a3b8e4dbdaf1",
+    "block_time": "2026-10-22T13:58:09.000Z",
+    "amount_units": "20000000",
+    "sender": "0xfaec9cdc3ef75713b48f46057b98ba04885e3391"
+  },
+  "verified": [
+    "HTTP invoice creation and idempotent replay",
+    "public-testnet USDC transfer",
+    "successful canonical receipt and finalized settlement",
+    "signed payment webhook delivered",
+    "payment receipt and voucher issued",
+    "voucher redeemed once",
+    "same-key replay succeeds",
+    "second redemption rejected with 409",
+    "signed redemption webhook delivered",
+    "repeat scan does not duplicate fulfillment"
+  ],
+  "events": [
+    {
+      "id": "76203358-c339-4113-8869-24f706b709ac",
+      "type": "payment.paid"
+    },
+    {
+      "id": "ecd87071-a3d8-44a6-b233-9e5f818c26f5",
+      "type": "voucher.redeemed"
+    }
+  ],
+  "counts": {
+    "vouchers": 1,
+    "transfers": 1,
+    "delivered": 2
+  },
+  "completedAt": "2026-10-22T14:15:53.014Z"
+}
