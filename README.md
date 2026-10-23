@@ -1,4 +1,4 @@
-# Payment Core
+# Crypto Payment Core
 
 A small, single-merchant service for USDC payment requests, verified payment records, signed webhooks and optional single-use vouchers. It is a standalone implementation of the narrow payment-to-voucher workflow identified in Kokoro Pay. No original deployment configuration or Git history is included.
 
@@ -11,7 +11,7 @@ A small, single-merchant service for USDC payment requests, verified payment rec
 - `viem` for read-only chain queries and ERC-20 decoding; only finalized blocks can produce a receipt.
 - JSON APIs, including an invoice-scoped read API for any customer checkout. The backend detects payment even if a browser closes.
 
-This repository is API-only. The optional **payment-ui** repository owns the React/Wagmi customer checkout and a read-only merchant dashboard. They have independent dependencies, builds and servers; no UI source or static server is included here. See [the HTTP boundary](docs/UI-INTEGRATION.md).
+This repository is API-only. The optional **crypto-payment-ui** repository owns the React/Wagmi customer checkout and a read-only merchant dashboard. They have independent dependencies, builds and servers; no UI source or static server is included here. See [the HTTP boundary](docs/UI-INTEGRATION.md).
 
 No custom blockchain, token, wallet, signing service or on-chain voucher contract is needed. Fastify replaces the original broad NestJS application shell; the payment domain is independent of either HTTP framework. Redis, subscriptions, plans, organizations, Stripe, treasury, branding and private infrastructure are not carried over.
 
@@ -26,7 +26,7 @@ Requires Node.js 22.14+ and PostgreSQL 16+. Commands run from the repository roo
 5. Set `RPC_URL` for the selected Base network. The endpoint must support finalized block queries, historical logs and receipts. Start with Base Sepolia and its test USDC.
 6. Set `WEBHOOK_URL` to your merchant application's endpoint. For a durable example, configure a separate `MERCHANT_DATABASE_URL` and run `npm run example:merchant` in another terminal. `example:webhook` is only a logging diagnostic.
 7. Run `npm run build`, then `npm start`. The service validates the chain and token decimals, applies the transactional migration and starts polling.
-8. Create an invoice through the merchant API. For the optional UI, start payment-ui separately and set `CHECKOUT_URL` to its checkout page (locally `http://127.0.0.1:4006/checkout/`). The response then includes a `checkoutUrl`; without this setting it is `null` and the scoped `checkoutToken` remains available for your own integration.
+8. Create an invoice through the merchant API. For the optional UI, start crypto-payment-ui separately and set `CHECKOUT_URL` to its checkout page (locally `http://127.0.0.1:4006/checkout/`). The response then includes a `checkoutUrl`; without this setting it is `null` and the scoped `checkoutToken` remains available for your own integration.
 
 `npm run dev` runs only the API and workers directly from TypeScript. `npm run probe` checks RPC identity, USDC decimals and finalized head without signing or sending a transaction.
 
@@ -104,7 +104,7 @@ Return 2xx only after durable handling. Delivery is at least once; duplicates ar
 
 ## Verification and release boundary
 
-Run `npm run check`, `npm test` and `npm run build`. Integration tests create a real, temporary PostgreSQL cluster by default (or an isolated schema using `TEST_DATABASE_URL`). Local EVM adapter tests use Anvil and test-only token bytecode. Browser acceptance lives in payment-ui and starts both servers over HTTP; core checks require no UI checkout or browser dependency. No real funds are required. Test-only private keys must never be used outside the local EVM.
+Run `npm run check`, `npm test` and `npm run build`. Integration tests create a real, temporary PostgreSQL cluster by default (or an isolated schema using `TEST_DATABASE_URL`). Local EVM adapter tests use Anvil and test-only token bytecode. Browser acceptance lives in crypto-payment-ui and starts both servers over HTTP; core checks require no UI checkout or browser dependency. No real funds are required. Test-only private keys must never be used outside the local EVM.
 
 A live Base Sepolia acceptance test passed using 20 free faucet USDC sent directly to an invoice: finalized payment, receipt, signed webhooks, single-use voucher and checkout confirmation. See the [validation record](docs/VALIDATION.md) for the transaction and results. Installed-wallet signing remains untested; it can also run without real money using test USDC and test ETH for gas from [Base's funding sources](https://docs.base.org/get-started/get-funds). No mainnet payment is required for development validation or open-source publication.
 

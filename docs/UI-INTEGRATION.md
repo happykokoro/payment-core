@@ -1,10 +1,10 @@
-# Optional Payment UI integration
+# Optional Crypto Payment UI integration
 
-Payment Core runs independently on its own `main` branch. Payment UI is a separate Git repository, not a branch of the core. Production UI code imports no core source and has no database connection.
+Crypto Payment Core runs independently on its own `main` branch. Crypto Payment UI is a separate Git repository, not a branch of the core. Production UI code imports no core source and has no database connection.
 
 ## Local pair
 
-| Setting | payment-core | payment-ui |
+| Setting | crypto-payment-core | crypto-payment-ui |
 | --- | --- | --- |
 | Listener | `PORT=4004` | `UI_PORT=4006` |
 | Browser address | none | `UI_PUBLIC_URL=http://127.0.0.1:4006` |
@@ -30,4 +30,4 @@ For API-only deployment, leave `CHECKOUT_URL` empty. Create/get responses return
 
 Replace `PUBLIC_URL` with `CHECKOUT_URL` pointing to the separate UI's full checkout path. The core no longer hosts `/checkout/`. Existing links to the old core origin need to be replaced with links from the updated invoice endpoint (or handled by your deployment's reverse proxy); the token itself is unchanged. Do not change credential secrets for this move.
 
-Migration 003 adds invoice listing indexes only. No payment rows or credential identities change. Deploy core support for the list endpoint before this dashboard. Browser acceptance moved to payment-ui; both projects otherwise build and test independently.
+Migration 003 adds invoice listing indexes only. No payment rows or credential identities change. Deploy core support for the list endpoint before this dashboard. Browser acceptance moved to crypto-payment-ui; both projects otherwise build and test independently.

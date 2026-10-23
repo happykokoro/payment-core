@@ -8,13 +8,13 @@ The concrete first route is USDC on Base, with Base Sepolia for development. Thi
 
 ## Structure
 
-`domain.ts` contains pure admission rules. Focused `services/` modules own invoice creation, settlement, vouchers, exceptions, refunds and credential lifecycle. `ledger.ts` only composes these services. `chain.ts` supplies verified evidence, `monitor.ts` scans finalized blocks, and `observations.ts` supplies advisory progress. `webhooks.ts` delivers events, `health.ts` reports operational state, and `http/` holds thin authenticated route handlers. The optional checkout and dashboard live in the separate payment-ui repository. See [architecture](ARCHITECTURE.md) for dependencies and transaction boundaries.
+`domain.ts` contains pure admission rules. Focused `services/` modules own invoice creation, settlement, vouchers, exceptions, refunds and credential lifecycle. `ledger.ts` only composes these services. `chain.ts` supplies verified evidence, `monitor.ts` scans finalized blocks, and `observations.ts` supplies advisory progress. `webhooks.ts` delivers events, `health.ts` reports operational state, and `http/` holds thin authenticated route handlers. The optional checkout and dashboard live in the separate crypto-payment-ui repository. See [architecture](ARCHITECTURE.md) for dependencies and transaction boundaries.
 
 One merchant per deployment, one route per database, one process, PostgreSQL. No generalized plugin registry or microservice fleet. A small Fastify shell is used instead of transplanting Kokoro Pay's entire NestJS application and its unrelated modules; the independent domain can be embedded behind either framework. Raw parameterized SQL makes row locks and the outbox transaction explicit without copying the large Prisma schema.
 
 No upstream framework is forked. EVM transactions are decoded with viem; wallet connections and requests use Wagmi; QR encoding uses qrcode; database concurrency uses PostgreSQL.
 
-On 2026-10-22 the owner accepted separate API and UI repositories. The bounded UI addition is a read-only dashboard: invoice listing/filtering and detail, transfers/reviews, receipt/voucher state, recorded refunds, audit history, webhook deliveries and health. The core adds only a paginated read endpoint and its indexes. This does not authorize a new merchant platform or changes to payment rules; wallet/QR dependencies belong exclusively to payment-ui.
+On 2026-10-22 the owner accepted separate API and UI repositories. The bounded UI addition is a read-only dashboard: invoice listing/filtering and detail, transfers/reviews, receipt/voucher state, recorded refunds, audit history, webhook deliveries and health. The core adds only a paginated read endpoint and its indexes. This does not authorize a new merchant platform or changes to payment rules; wallet/QR dependencies belong exclusively to crypto-payment-ui.
 
 ## Extraction provenance
 

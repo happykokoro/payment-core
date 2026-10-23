@@ -19,7 +19,7 @@ The application is one process and one PostgreSQL database. Modules follow respo
 | `webhooks.ts`, `health.ts` | Delivery retries and observable operational state | Infer settlement from delivery success |
 | `http/`, `api.ts` | Validation, authentication, thin route mapping, application composition | Implement payment workflows |
 | `ledger.ts` | Small compatibility facade composing services | Accumulate new business rules |
-| Separate `payment-ui` repository | Checkout, read-only dashboard and server-side API proxy | Access the payment database, issue credentials or claim settlement |
+| Separate `crypto-payment-ui` repository | Checkout, read-only dashboard and server-side API proxy | Access the payment database, issue credentials or claim settlement |
 | `examples/merchant/` | Separate merchant inbox and entitlement transaction | Become part of the core's database |
 
 ## Separate state machines
